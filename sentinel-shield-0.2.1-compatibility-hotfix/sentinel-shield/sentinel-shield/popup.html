@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sentinel Shield</title>
+  <link rel="stylesheet" href="ui.css">
+</head>
+<body class="popup-body">
+  <div class="popup-shell">
+    <header class="brandbar">
+      <div class="brand-icon"><img src="icons/shield-48.png" alt=""></div>
+      <div class="brand-copy"><div class="brand-name">SENTINEL <span>SHIELD</span></div><div class="brand-sub">PRIVACY & CONTENT GUARD</div></div>
+      <button id="powerToggle" class="power-button" aria-label="Toggle protection" title="Toggle protection"><span class="power-glyph">⏻</span></button>
+    </header>
+
+    <section class="protection-card" id="protectionCard">
+      <div class="status-orb"><span></span></div>
+      <div class="protection-copy"><div class="eyebrow">PROTECTION STATUS</div><div id="protectionTitle" class="protection-title">Starting protection…</div><div id="protectionDetail" class="muted small">Loading local filters</div></div>
+      <div id="statusPill" class="pill good">ACTIVE</div>
+    </section>
+
+    <section class="site-card">
+      <div class="site-head"><div class="section-label">CURRENT WEBSITE</div><span id="siteLock" class="site-lock">●</span></div>
+      <div class="site-main"><div class="site-favicon" id="siteFavicon">S</div><div class="site-info"><div id="siteHost" class="site-host">New tab</div><div id="siteState" class="site-state">No active website</div></div><label class="switch"><input id="siteToggle" type="checkbox" checked disabled><span class="slider"></span></label></div>
+      <div class="site-block-counter"><span><i class="footer-dot"></i><span data-i18n="BLOCKS ON THIS SITE TODAY">BLOCKS ON THIS SITE TODAY</span></span><strong id="siteBlockedCount">0</strong></div>
+      <div class="site-foot"><span id="siteFootText">Protection follows you across sites</span><button id="manageSite" class="text-button">Site controls ↗</button></div>
+    </section>
+
+    <section class="stats-grid">
+      <div class="stat-card"><div class="stat-label"><span class="stat-dot pink"></span>BLOCKED TODAY</div><div id="blockedToday" class="stat-number">0</div><div class="stat-foot">requests stopped</div></div>
+      <div class="stat-card"><div class="stat-label"><span class="stat-dot blue"></span>FILTER RULES</div><div id="filterCount" class="stat-number">—</div><div id="filterFoot" class="stat-foot">local seed rules</div></div>
+    </section>
+
+    <section class="quick-controls">
+      <div class="section-heading"><div><div class="section-label">QUICK CONTROLS</div><div class="section-hint">Tune the shield without leaving the page</div></div><button id="openDashboard" class="icon-button" title="Open full dashboard">↗</button></div>
+      <div class="quick-row"><div class="feature-icon icon-ad">◩</div><div class="feature-copy"><strong>Ad blocking</strong><span>Ad networks & delivery hosts</span></div><label class="switch"><input data-setting="blockAds" type="checkbox" checked><span class="slider"></span></label></div>
+      <div class="quick-row"><div class="feature-icon icon-track">⌁</div><div class="feature-copy"><strong>Tracker blocking</strong><span>Analytics & tracking endpoints</span></div><label class="switch"><input data-setting="blockTrackers" type="checkbox" checked><span class="slider"></span></label></div>
+      <div class="quick-row"><div class="feature-icon icon-mal">⛨</div><div class="feature-copy"><strong>Threat domain list</strong><span>Built-in + community host feeds</span></div><label class="switch"><input data-setting="blockMalware" type="checkbox" checked><span class="slider"></span></label></div>
+      <div class="quick-row"><div class="feature-icon icon-dom">▧</div><div class="feature-copy"><strong>Cosmetic filtering</strong><span>Hide common ad containers</span></div><label class="switch"><input data-setting="cosmeticFiltering" type="checkbox" checked><span class="slider"></span></label></div>
+    </section>
+
+    <section class="recent-section">
+      <div class="section-heading"><div><div class="section-label">RECENTLY BLOCKED</div><div class="section-hint">Latest matches from the request log</div></div><button id="viewActivity" class="text-button">View all →</button></div>
+      <div id="recentList" class="recent-list"><div class="empty-state">No blocked requests yet. That’s a good sign.</div></div>
+    </section>
+
+    <footer class="popup-footer"><span><i class="footer-dot"></i>Local-first · No account required</span><button id="openSettings" class="text-button">Advanced settings</button></footer>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </div>
+  <script src="localization.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

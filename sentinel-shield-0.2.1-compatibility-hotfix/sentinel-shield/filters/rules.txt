@@ -1,0 +1,30 @@
+# Conservative URL substring rules: url|category|literal-substring
+# Rules apply only to third-party requests and compatible resource types.
+url|ads|/pagead/ads
+url|ads|/pagead/managed/
+url|ads|/adservice/
+url|ads|/adserver/
+url|ads|/adsystem/
+url|ads|/adsbygoogle.js
+url|ads|/banner-ad/
+url|ads|/sponsored-content/
+url|ads|/vast/
+url|trackers|/collect?v=2
+url|trackers|/g/collect?
+url|trackers|/analytics.js
+url|trackers|/gtag/js
+url|trackers|/fbevents.js
+url|trackers|/beacon.min.js
+url|trackers|/pixel.gif
+url|trackers|/tracking.gif
+url|trackers|/analytics/collect
+url|trackers|/tracking/pixel
+url|trackers|/api/track
+url|trackers|/events/track
+url|trackers|/session-replay/
+url|trackers|/browser/rum
+url|trackers|platform.twitter.com/widgets.js
+url|trackers|s.pinimg.com/ct
+url|trackers|bing.com/fd/ls/
+url|trackers|tiktok.com/i18n/pixel
+url|trackers|hubspot.com/track

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Sentinel Shield — Security warning</title>
+  <link rel="stylesheet" href="ui.css">
+  <link rel="stylesheet" href="warning.css">
+</head>
+<body class="warning-body">
+  <main class="warning-shell">
+    <div class="warning-brand"><img src="icons/shield-48.png" alt=""><span>SENTINEL <b>SHIELD</b></span></div>
+    <section class="warning-card" aria-labelledby="warningTitle">
+      <div class="warning-illustration" aria-hidden="true"><span class="warning-triangle">!</span></div>
+      <div id="warningKind" class="warning-kicker">SECURITY WARNING</div>
+      <h1 id="warningTitle">Este site possivelmente não é seguro!</h1>
+      <p id="warningMessage" class="warning-message">O Sentinel detectou uma condição que merece atenção.</p>
+      <div id="warningDetail" class="warning-detail"></div>
+      <div class="warning-destination"><span id="destinationLabel">Site de destino</span><strong id="destinationHost">—</strong></div>
+      <div class="warning-actions">
+        <button id="continueButton" class="warning-continue" type="button">Sim, continuar para o site</button>
+        <button id="backButton" class="warning-back" type="button">Não, voltar</button>
+      </div>
+      <p id="warningFootnote" class="warning-footnote">Continuar não desbloqueia o script identificado; o Sentinel continuará bloqueando essa requisição.</p>
+    </section>
+    <div class="warning-footer">SENTINEL SHIELD <span>·</span> PROTEÇÃO LOCAL</div>
+    <div id="warningError" class="warning-error" role="status" aria-live="polite"></div>
+  </main>
+  <script src="localization.js"></script>
+  <script src="warning.js"></script>
+</body>
+</html>

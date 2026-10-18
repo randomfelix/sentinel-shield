@@ -1,0 +1,25 @@
+# Conservative selectors only; cosmetic filtering is not script execution prevention.
+# One CSS selector per line.
+[id^="google_ads_iframe"]
+iframe[src*="doubleclick.net"]
+iframe[src*="googlesyndication.com"]
+iframe[id^="google_ads_iframe"]
+.adsbygoogle
+[data-ad-client]
+[data-ad-slot]
+[class~="ad-banner"]
+[class~="advertisement"]
+[id~="advertisement"]
+[class*="sponsored-content"]
+[class*="sponsored-post"]
+[aria-label="Advertisement"]
+ins.adsbygoogle
+.ad-container
+.ad-slot
+.advertisement-container
+[class*="ad-unit"]
+[id*="ad-container"]
+[data-ad-status="filled"]
+iframe[src*="/ads/"]
+[class*="sponsored-ad"]
+
