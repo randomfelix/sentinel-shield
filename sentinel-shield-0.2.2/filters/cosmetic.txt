@@ -1,0 +1,66 @@
+# Conservative selectors only; cosmetic filtering is not script execution prevention.
+# One CSS selector per line.
+[id^="google_ads_iframe"]
+iframe[src*="doubleclick.net"]
+iframe[src*="googlesyndication.com"]
+iframe[id^="google_ads_iframe"]
+.adsbygoogle
+[data-ad-client]
+[data-ad-slot]
+[class~="ad-banner"]
+[class~="advertisement"]
+[id~="advertisement"]
+[class*="sponsored-content"]
+[class*="sponsored-post"]
+[aria-label="Advertisement"]
+ins.adsbygoogle
+.ad-container
+.ad-slot
+.advertisement-container
+[class*="ad-unit"]
+[id*="ad-container"]
+[data-ad-status="filled"]
+iframe[src*="/ads/"]
+[class*="sponsored-ad"]
+# Additional banner, sticky, interstitial, popup and push-prompt ad containers.
+[id^="ad_iframe"]
+iframe[name*="adframe" i]
+[class*="popup-ad" i]
+[id*="popup-ad" i]
+[class*="popunder" i]
+[id*="popunder" i]
+[class*="ad-popup" i]
+[id*="ad-popup" i]
+[class*="ad-overlay" i]
+[id*="ad-overlay" i]
+[class*="advertisement-overlay" i]
+[id*="advertisement-overlay" i]
+[class*="interstitial-ad" i]
+[id*="interstitial-ad" i]
+[class*="sticky-ad" i]
+[id*="sticky-ad" i]
+[class*="floating-ad" i]
+[id*="floating-ad" i]
+[class*="push-notification-ad" i]
+[id*="push-notification-ad" i]
+[class*="sponsored-banner" i]
+[id*="sponsored-banner" i]
+[data-ad-container]
+[data-advertisement]
+[data-ad-unit]
+[aria-label="Sponsored advertisement"]
+[aria-label*="advertisement" i]
+[aria-label*="sponsored ad" i]
+.advertisement-banner
+.advertising-banner
+.popup-advertisement
+.ad-popover
+.ad-interstitial
+.ad-sticky
+.ad-floating
+.popunder-ad
+.push-ad-container
+.push-prompt-ad
+#google_vignette
+#onesignal-slidedown-container
+#onesignal-popover-container

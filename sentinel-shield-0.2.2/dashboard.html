@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sentinel Shield — Dashboard</title>
+  <link rel="stylesheet" href="ui.css">
+</head>
+<body class="dashboard-body">
+  <div class="dash-shell">
+    <aside class="sidebar">
+      <div class="brandbar">
+        <div class="brand-icon"><img src="icons/shield-48.png" alt=""></div>
+        <div class="brand-copy"><div class="brand-name">SENTINEL <span>SHIELD</span></div><div class="brand-sub">PRIVACY & CONTENT GUARD</div></div>
+      </div>
+      <div class="side-label">WORKSPACE</div>
+      <nav class="nav-stack" aria-label="Dashboard sections">
+        <button class="nav-button active" data-page="overview"><span class="nav-icon">◈</span>Overview</button>
+        <button class="nav-button" data-page="activity"><span class="nav-icon">≋</span>Request activity</button>
+        <button class="nav-button" data-page="filters"><span class="nav-icon">⛨</span>Filter lists</button>
+        <button class="nav-button" data-page="exceptions"><span class="nav-icon">◎</span>Allow & block rules</button>
+        <button class="nav-button" data-page="settings"><span class="nav-icon">⚙</span>Settings & data</button>
+        <button class="nav-button" data-page="mods"><span class="nav-icon">✳</span>Mods & translations</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="build-chip"><strong>Sentinel Shield · 0.2.2</strong><br>Local-first request filtering.<br><span class="muted-inline">Rules stay on this device.</span></div>
+      </div>
+    </aside>
+
+    <main class="dash-main">
+      <header class="dash-top">
+        <div><div class="dash-kicker">SENTINEL / SECURITY CENTER</div><h1 id="pageTitle" class="dash-title">Your protection overview</h1><div id="pageSubtitle" class="dash-subtitle">A live snapshot of the browser's local filtering engine.</div></div>
+        <div class="dash-actions"><span id="globalStatus" class="status-inline">Protection active</span><button id="headerPower" class="button-secondary">⏻ Pause protection</button></div>
+      </header>
+
+      <section id="page-overview" class="page-section active">
+        <div class="dash-grid">
+          <div class="dash-stat"><div class="dash-stat-label">BLOCKED TODAY</div><div id="ovBlocked" class="dash-stat-number">0</div><div class="dash-stat-foot">Matched requests this day</div></div>
+          <div class="dash-stat"><div class="dash-stat-label">DOMAIN RULES</div><div id="ovDomains" class="dash-stat-number">—</div><div id="ovDomainFoot" class="dash-stat-foot">Built-in host entries</div></div>
+          <div class="dash-stat"><div class="dash-stat-label">TRACKERS STOPPED</div><div id="ovTrackers" class="dash-stat-number">0</div><div class="dash-stat-foot">Current daily counter</div></div>
+          <div class="dash-stat"><div class="dash-stat-label">COSMETIC SELECTORS</div><div id="ovCosmetic" class="dash-stat-number">—</div><div class="dash-stat-foot">Selectors to hide ad containers</div></div>
+        </div>
+        <div class="layout-two">
+          <div class="dash-panel">
+            <div class="dash-panel-head"><div><div class="dash-panel-title">Protection layers</div><div class="dash-panel-desc">Switch individual defenses on or off. Changes apply immediately.</div></div></div>
+            <div class="feature-toggle-row"><div class="feature-icon icon-ad">◩</div><div class="toggle-copy"><strong>Advertising networks</strong><span>Block requests to known ad delivery domains and supported host-anchored filter rules.</span></div><label class="switch big-switch"><input data-setting="blockAds" type="checkbox"><span class="slider"></span></label></div>
+            <div class="feature-toggle-row"><div class="feature-icon icon-track">⌁</div><div class="toggle-copy"><strong>Trackers & analytics</strong><span>Block common analytics, telemetry, fingerprinting and attribution endpoints from the loaded lists.</span></div><label class="switch big-switch"><input data-setting="blockTrackers" type="checkbox"><span class="slider"></span></label></div>
+            <div class="feature-toggle-row"><div class="feature-icon icon-mal">⛨</div><div class="toggle-copy"><strong>Threat / adware domains</strong><span>Uses a small built-in seed plus the optional community host list updater.</span></div><label class="switch big-switch"><input data-setting="blockMalware" type="checkbox"><span class="slider"></span></label></div>
+            <div class="feature-toggle-row"><div class="feature-icon icon-dom">▧</div><div class="toggle-copy"><strong>Cosmetic filtering</strong><span>Hide selected common ad containers. This does not analyze or disable inline JavaScript.</span></div><label class="switch big-switch"><input data-setting="cosmeticFiltering" type="checkbox"><span class="slider"></span></label></div>
+          </div>
+          <div>
+            <div class="dash-panel">
+              <div class="dash-panel-head"><div><div class="dash-panel-title">Filter engine</div><div class="dash-panel-desc">Loaded rules and local runtime status.</div></div><span class="status-inline">Local</span></div>
+              <div class="source-row"><div class="source-icon">⌘</div><div><div class="source-name">Domain matching</div><div class="source-note">Exact host + subdomain lookup</div></div><div><div id="runtimeDomains" class="source-state">—</div><div class="source-count">domain entries</div></div></div>
+              <div class="source-row"><div class="source-icon">▤</div><div><div class="source-name">URL patterns</div><div class="source-note">Conservative literal path matches</div></div><div><div id="runtimeUrls" class="source-state">—</div><div class="source-count">URL rules</div></div></div>
+              <div class="source-row"><div class="source-icon">◉</div><div><div class="source-name">Request history</div><div class="source-note">Recent blocked matches</div></div><div><div id="runtimeLogs" class="source-state">—</div><div class="source-count">saved entries</div></div></div>
+              <button class="button-secondary" data-jump="filters" style="width:100%;justify-content:center;margin-top:8px">Manage filter lists ↗</button>
+            </div>
+          </div>
+        </div>
+        <div class="dash-panel" style="margin-top:15px">
+          <div class="dash-panel-head"><div><div class="dash-panel-title">Latest blocked requests</div><div class="dash-panel-desc">Most recent filter matches across sites.</div></div><button class="button-secondary" data-jump="activity">Open activity log ↗</button></div>
+          <div id="overviewRecent" class="recent-list"><div class="empty-state">No requests blocked yet.</div></div>
+        </div>
+      </section>
+
+      <section id="page-activity" class="page-section">
+        <div class="dash-panel">
+          <div class="dash-panel-head"><div><div class="dash-panel-title">Request activity</div><div class="dash-panel-desc">Shows blocked requests only. The extension does not record page text or form contents.</div></div><button id="clearLogs" class="button-secondary">Clear log</button></div>
+          <div class="field-row" style="margin-bottom:14px"><input id="activitySearch" class="text-input search-field" type="search" placeholder="Search host, page or category…"><select id="activityCategory" class="select-input" style="max-width:180px"><option value="all">All categories</option><option value="ads">Ads</option><option value="trackers">Trackers</option><option value="malware">Threat / custom</option><option value="annoyances">Annoyances</option></select><div id="activityCount" class="muted-inline" style="margin-left:auto;font-size:10px">0 entries</div></div>
+          <div style="overflow:auto"><table class="data-table"><thead><tr><th style="width:85px">TIME</th><th style="width:22%">PAGE</th><th style="width:25%">BLOCKED HOST</th><th style="width:82px">TYPE</th><th style="width:96px">CATEGORY</th><th>REASON</th></tr></thead><tbody id="activityRows"><tr><td colspan="6" class="empty-table">No log entries yet.</td></tr></tbody></table></div>
+        </div>
+        <div class="notice">The log is stored locally in Firefox extension storage and capped at 500 recent matches. Clear it at any time. Logs can contain visited hostnames, so avoid exporting or sharing them if that would reveal sensitive browsing.</div>
+      </section>
+
+      <section id="page-filters" class="page-section">
+        <div class="dash-panel">
+          <div class="dash-panel-head"><div><div class="dash-panel-title">Filter list sources</div><div class="dash-panel-desc">Starter rules work offline. Updating downloads current community lists into local extension storage.</div></div><button id="updateFilters" class="button-primary">⟳ Update filter lists</button></div>
+          <div id="updateNote" class="form-note" style="margin-bottom:10px">No update has been run in this session.</div>
+          <div id="sourcesList"></div>
+        </div>
+        <div class="dash-panel">
+          <div class="dash-panel-title">How list importing works</div>
+          <div class="dash-panel-desc">The updater recognizes hosts-file entries and a useful subset of Adblock Plus syntax, especially domain-anchored rules, exceptions and some type-scoped rules. It does not implement every EasyList feature, scriptlet, redirect, procedural cosmetic rule or CSP directive. A reported list size is not a guarantee of complete upstream rule compatibility.</div>
+          <div class="notice" style="margin-top:14px"><strong>Sources:</strong> StevenBlack unified hosts (combined adware/malware sources), EasyList (ads), EasyPrivacy (tracking). These are third-party lists; review upstream content and licensing before redistributing this project. The update button contacts only those list URLs when explicitly pressed.</div>
+        </div>
+      </section>
+
+      <section id="page-exceptions" class="page-section">
+        <div class="layout-two">
+          <div class="dash-panel">
+            <div class="dash-panel-head"><div><div class="dash-panel-title">Allowlisted domains</div><div class="dash-panel-desc">Requests to these destination domains bypass Sentinel's filters. Use sparingly.</div></div></div>
+            <form id="allowForm" class="field-row"><input id="allowInput" class="text-input" placeholder="example.com" autocomplete="off" required><button class="button-primary" type="submit">Add allow rule</button></form>
+            <div id="allowList" style="margin-top:12px"><div class="empty-state">No allow rules yet.</div></div>
+          </div>
+          <div class="dash-panel">
+            <div class="dash-panel-head"><div><div class="dash-panel-title">Custom blocked domains</div><div class="dash-panel-desc">Add a hostname you want Sentinel to block locally.</div></div></div>
+            <form id="blockForm" class="field-row"><input id="blockInput" class="text-input" placeholder="ads.example.com" autocomplete="off" required><button class="button-primary" type="submit">Add block rule</button></form>
+            <div id="blockList" style="margin-top:12px"><div class="empty-state">No custom block rules yet.</div></div>
+          </div>
+        </div>
+        <div class="notice warn"><strong>Heads up:</strong> allow rules win over built-in and downloaded filter lists. Custom block rules are your own choices and are not proof that a domain is malicious. Broad entries such as major service domains may break sign-in, video, shopping or other site features.</div>
+      </section>
+
+      <section id="page-settings" class="page-section">
+        <div class="dash-panel">
+          <div class="dash-panel-head"><div><div class="dash-panel-title">Language</div><div class="dash-panel-desc">Choose the interface language. Official packs are Brazilian Portuguese and English.</div></div></div>
+          <div class="field-row"><label for="languageSelect" class="muted-inline">Interface language</label><select id="languageSelect" class="select-input" style="max-width:260px"><option value="en" selected>English</option><option value="pt-BR">Português (Brasil)</option></select></div>
+        </div>
+        <div class="dash-panel">
+          <div class="dash-panel-head"><div><div class="dash-panel-title">Advanced protection</div><div class="dash-panel-desc">Choose how Sentinel handles known malicious requests and unencrypted HTTP.</div></div></div>
+          <div class="feature-toggle-row"><div class="feature-icon icon-mal">⚠</div><div class="toggle-copy"><strong>Warn on known malicious scripts</strong><span>Cancel a matching script request and open a warning screen before allowing the site to continue. Known malicious top-level domains also show the warning.</span></div><label class="switch big-switch"><input data-setting="warnMaliciousScripts" type="checkbox"><span class="slider"></span></label></div>
+          <div class="feature-toggle-row"><div class="feature-icon icon-mal">⌁</div><div class="toggle-copy"><strong>Warn on HTTP sites</strong><span>Show a warning before opening unencrypted HTTP pages. Continuing applies to that navigation only.</span></div><label class="switch big-switch"><input data-setting="warnHttp" type="checkbox"><span class="slider"></span></label></div>
+          <div class="feature-toggle-row"><div class="feature-icon icon-mal">⌁</div><div class="toggle-copy"><strong>Strict third-party script guard</strong><span>Block scripts whose host differs from the page host, even when no filter matches. This is intentionally off by default because it can break websites.</span></div><label class="switch big-switch"><input data-setting="strictThirdPartyScripts" type="checkbox"><span class="slider"></span></label></div>
+          <div class="feature-toggle-row"><div class="feature-icon icon-ad">◩</div><div class="toggle-copy"><strong>Popup & annoyance blocking</strong><span>Blocks known popup/pop-under ad destinations and supports additional annoyance rules. Some sites may need an exception.</span></div><label class="switch big-switch"><input data-setting="blockAnnoyances" type="checkbox"><span class="slider"></span></label></div>
+        </div>
+        <div class="dash-panel">
+          <div class="dash-panel-head"><div><div class="dash-panel-title">Backup & maintenance</div><div class="dash-panel-desc">Export settings for a backup or import a previously exported JSON file.</div></div></div>
+          <div class="field-row" style="flex-wrap:wrap"><button id="exportData" class="button-secondary">↓ Export settings & logs</button><label class="button-secondary" for="importFile">↑ Import backup JSON</label><input id="importFile" type="file" accept="application/json,.json" hidden><button id="resetStats" class="button-secondary">Reset counters</button><button id="clearAllLogs" class="button-danger">Clear request log</button></div>
+          <div class="form-note">Export includes the recent request log and downloaded filter cache. Treat the file as private because log entries can contain hostnames. Import applies the settings and lists from your JSON structure only where supported.</div>
+        </div>
+      </section>
+      <section id="page-mods" class="page-section">
+        <div class="dash-panel">
+          <div class="dash-panel-head"><div><div class="dash-panel-title">Mods & translations</div><div class="dash-panel-desc">A simple, readable extension point for forks and community language packs.</div></div><span class="status-inline">Open source friendly</span></div>
+          <div class="source-row"><div class="source-icon">文</div><div><div class="source-name">Português (Brasil)</div><div class="source-note">Official language pack · <code>mods/translate/pt-BR.json</code></div></div><div><a class="row-action" href="mods/translate/pt-BR.json" target="_blank" rel="noopener noreferrer">Open JSON ↗</a></div></div>
+          <div class="source-row"><div class="source-icon">A</div><div><div class="source-name">English</div><div class="source-note">Official language pack · <code>mods/translate/en.json</code></div></div><div><a class="row-action" href="mods/translate/en.json" target="_blank" rel="noopener noreferrer">Open JSON ↗</a></div></div>
+          <div class="notice" style="margin-top:14px"><strong>Adding a language in a fork</strong><br>Copy <code>en.json</code>, keep the same English keys, translate the values, and save it as <code>your-locale.json</code> in <code>mods/translate/</code>. Then register the locale in <code>background.js</code>, <code>localization.js</code> and the language selector in Settings. Keep the JSON valid and do not add executable code to translation files.</div>
+        </div>
+        <div class="dash-panel">
+          <div class="dash-panel-title">Modding principles</div>
+          <div class="dash-panel-desc">Sentinel mods are deliberately plain text and JSON. Translation packs do not execute code, and the core engine does not load third-party JavaScript plugins. Forks can customize the interface, rules and localization while keeping changes easy to review.</div>
+        </div>
+      </section>
+      <div id="dashToast" class="toast-dashboard" role="status" aria-live="polite"></div>
+    </main>
+  </div>
+  <script src="localization.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
