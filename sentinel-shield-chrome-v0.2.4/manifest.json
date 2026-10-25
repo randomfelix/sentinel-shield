@@ -1,0 +1,101 @@
+{
+  "manifest_version": 3,
+  "name": "Sentinel Shield — Privacy & Content Guard (Chrome)",
+  "version": "0.2.4",
+  "description": "Chrome MV3 content blocker for ads, trackers, intrusive overlays, and known malicious script sources.",
+  "minimum_chrome_version": "122",
+  "permissions": [
+    "storage",
+    "tabs",
+    "webRequest",
+    "webNavigation",
+    "declarativeNetRequest",
+    "unlimitedStorage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "chrome-background.js"
+  },
+  "action": {
+    "default_title": "Sentinel Shield — Chrome",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icons/shield-48.png",
+      "96": "icons/shield-96.png"
+    }
+  },
+  "icons": {
+    "48": "icons/shield-48.png",
+    "96": "icons/shield-96.png"
+  },
+  "options_ui": {
+    "page": "dashboard.html",
+    "open_in_tab": true
+  },
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ads_rules",
+        "enabled": true,
+        "path": "rules/ads.json"
+      },
+      {
+        "id": "trackers_rules",
+        "enabled": true,
+        "path": "rules/trackers.json"
+      },
+      {
+        "id": "malware_rules",
+        "enabled": true,
+        "path": "rules/malware.json"
+      },
+      {
+        "id": "annoyances_rules",
+        "enabled": true,
+        "path": "rules/annoyances.json"
+      }
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "compat.js",
+        "threat-watch.js",
+        "content.js",
+        "page-badge.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://youtube.com/*",
+        "*://*.youtube.com/*",
+        "*://youtube-nocookie.com/*",
+        "*://*.youtube-nocookie.com/*"
+      ],
+      "js": [
+        "compat.js",
+        "youtube.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "filters/cosmetic.txt",
+        "filters/hosts.txt"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
+}
