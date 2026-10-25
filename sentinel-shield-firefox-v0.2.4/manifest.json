@@ -1,0 +1,84 @@
+{
+  "manifest_version": 3,
+  "name": "Sentinel Shield — Privacy & Content Guard",
+  "version": "0.2.4",
+  "description": "Firefox privacy and content guard for ads, trackers, intrusive overlays, and known malicious script sources.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "sentinel-shield@local.invalid",
+      "strict_min_version": "128.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
+    }
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "tabs",
+    "unlimitedStorage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "action": {
+    "default_title": "Sentinel Shield",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icons/shield-48.png",
+      "96": "icons/shield-96.png"
+    }
+  },
+  "icons": {
+    "48": "icons/shield-48.png",
+    "96": "icons/shield-96.png"
+  },
+  "options_ui": {
+    "page": "dashboard.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js",
+        "page-badge.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://youtube.com/*",
+        "*://*.youtube.com/*",
+        "*://youtube-nocookie.com/*",
+        "*://*.youtube-nocookie.com/*"
+      ],
+      "js": [
+        "youtube.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "filters/cosmetic.txt"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
+}

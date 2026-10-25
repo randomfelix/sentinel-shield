@@ -1,0 +1,26 @@
+/* Static smoke checks; run with Node.js from the build folder. */
+'use strict';
+const fs = require('node:fs');
+const assert = require('node:assert/strict');
+const manifest = JSON.parse(fs.readFileSync('manifest.json', 'utf8'));
+assert.equal(manifest.version, '0.2.4');
+const youtube = fs.readFileSync('youtube.js', 'utf8');
+assert(!youtube.includes('ytd-rich-item-renderer:has(ytd-ad-slot-renderer)'));
+assert(!youtube.includes("'googlevideo.com'"));
+for (const selector of ['#masthead-container', '#logo', 'yt-searchbox']) assert(youtube.includes(selector));
+const badge = fs.readFileSync('page-badge.js', 'utf8');
+assert(badge.includes('Remove watermark'));
+assert(badge.includes('recentBlocks'));
+const bg = fs.readFileSync(manifest.background.service_worker || 'background.js', 'utf8');
+assert(/showPageBadge\s*:\s*false/.test(bg));
+assert(bg.includes('reducedMotion'));
+assert(bg.includes('showTrackerCount'));
+assert(bg.includes('disconnect-tracking'));
+assert(bg.includes('FingerprintingGeneral'));
+assert(bg.includes('FingerprintingInvasive'));
+assert(bg.includes("'uiSettingsRevision', 'defaultLanguageMigration'"));
+const dash = fs.readFileSync('dashboard.html', 'utf8');
+assert(dash.includes('Reduced motion'));
+assert(dash.includes('Show tracker count on extension icon'));
+assert(dash.includes('On-page watermark'));
+console.log('Sentinel Shield v0.2.4 static smoke checks passed');

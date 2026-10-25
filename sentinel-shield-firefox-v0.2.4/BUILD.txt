@@ -1,0 +1,5 @@
+Sentinel Shield v0.2.4
+Build target: firefox
+Separate browser build; same public version number by design.
+Watermark disabled by default.
+Tracker-source updates are user initiated from Dashboard → Filter lists.
